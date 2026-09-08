@@ -607,7 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c9b84734220264d9dd64b732a935ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoGoZone
-  warningDist: 0.96
+  warningDist: 1.18
   restartDist: 0.53
 --- !u!23 &949552707
 MeshRenderer:
@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c9b84734220264d9dd64b732a935ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoGoZone
-  warningDist: 0.96
+  warningDist: 1.18
   restartDist: 0.53
 --- !u!1 &1184262485
 GameObject:
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c9b84734220264d9dd64b732a935ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoGoZone
-  warningDist: 0.96
+  warningDist: 1.18
   restartDist: 0.53
 --- !u!1 &1462336826
 GameObject:
@@ -922,7 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c9b84734220264d9dd64b732a935ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoGoZone
-  warningDist: 0.96
+  warningDist: 1.18
   restartDist: 0.53
 --- !u!23 &1462336828
 MeshRenderer:
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c9b84734220264d9dd64b732a935ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoGoZone
-  warningDist: 0.96
+  warningDist: 1.18
   restartDist: 0.53
 --- !u!23 &1639497175
 MeshRenderer:
