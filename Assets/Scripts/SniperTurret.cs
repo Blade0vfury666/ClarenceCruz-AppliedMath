@@ -11,14 +11,20 @@ public class SniperTurret : MonoBehaviour
     {
         cooldown -= Time.deltaTime;
 
-        Vector3 dir = GameObject.FindWithTag("Player").transform.position - transform.position;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        if (Vector3.Distance(transform.position, GameObject.FindWithTag("Player").transform.position) < range && Vector3.Angle(transform.forward, dir) < 2f)
+        for (int i = 0; i < enemies.Length; i++)
         {
-            if (cooldown <= 0f)
+            Vector3 direction = enemies[i].transform.position - transform.position;
+
+            if (Vector3.Distance(transform.position, enemies[i].transform.position) < range && Vector3.Angle(transform.forward, direction) < 2f)
             {
-                cooldown = 3f;
-                Instantiate(bulletPrefab, transform.position, transform.rotation);
+                if (cooldown <= 0f)
+                {
+                    cooldown = 3f;
+                    Instantiate(bulletPrefab, transform.position, transform.rotation);
+                }
+                break;
             }
         }
     }

@@ -12,19 +12,25 @@ public class ShotgunTurret : MonoBehaviour
     {
         cooldown -= Time.deltaTime;
 
-        Vector3 dir = GameObject.FindWithTag("Player").transform.position - transform.position;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        if (Vector3.Distance(transform.position, GameObject.FindWithTag("Player").transform.position) < range && Vector3.Angle(transform.forward, dir) < (coneAngle / 2f))
+        for (int i = 0; i < enemies.Length; i++)
         {
-            if (cooldown <= 0f)
-            {
-                cooldown = 2f;
+            Vector3 direction = enemies[i].transform.position - transform.position;
 
-                for (int i = -1; i <= 1; i++)
+            if (Vector3.Distance(transform.position, enemies[i].transform.position) < range && Vector3.Angle(transform.forward, direction) < (coneAngle / 2f))
+            {
+                if (cooldown <= 0f)
                 {
-                    Quaternion spreadRot = Quaternion.Euler(0, transform.eulerAngles.y + (i * 15f), 0);
-                    Instantiate(bulletPrefab, transform.position, spreadRot);
+                    cooldown = 2f;
+
+                    for (int step = -1; step <= 1; step++)
+                    {
+                        Quaternion spreadRotation = Quaternion.Euler(0, transform.eulerAngles.y + (step * 15f), 0);
+                        Instantiate(bulletPrefab, transform.position, spreadRotation);
+                    }
                 }
+                break;
             }
         }
     }
