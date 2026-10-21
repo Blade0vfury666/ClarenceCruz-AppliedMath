@@ -1,25 +1,25 @@
-using UnityEngine;
+// using UnityEngine;
 
-public class FlyingCoin : MonoBehaviour
-{
-    public float flySpeed = 5f;
-    float timer;
+// public class FlyingCoin : MonoBehaviour
+// {
+//     public float flySpeed = 5f;
+//     float timer;
 
-    void Update()
-    {
-        transform.position += Vector3.up * flySpeed * Time.deltaTime;
+//     void Update()
+//     {
+//         transform.position += Vector3.up * flySpeed * Time.deltaTime;
 
-        timer += Time.deltaTime;
+//         timer += Time.deltaTime;
 
-        if (timer >= 1f)
-        {
-            Add();
-        }
-    }
+//         if (timer >= 1f)
+//         {
+//             Add();
+//         }
+//     }
 
-    void Add()
-    {
-        CoinsUI.targetCoins += 10;
-        Destroy(gameObject);
-    }
-}
+//     void Add()
+//     {
+//         CoinsUI.targetCoins += 10;
+//         Destroy(gameObject);
+//     }
+// }

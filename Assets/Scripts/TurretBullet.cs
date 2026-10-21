@@ -1,28 +1,28 @@
-using UnityEngine;
+// using UnityEngine;
 
-public class TurretBullet : MonoBehaviour
-{
-    public float speed = 8f;
-    public float lifeTime = 4f;
-    public float hitDistance = 0.5f;
+// public class TurretBullet : MonoBehaviour
+// {
+//     public float speed = 8f;
+//     public float lifeTime = 4f;
+//     public float hitDistance = 0.5f;
 
-    float lifeTimer;
+//     float lifeTimer;
 
-    void Update()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
+//     void Update()
+//     {
+//         transform.position += transform.forward * speed * Time.deltaTime;
 
-        lifeTimer += Time.deltaTime;
+//         lifeTimer += Time.deltaTime;
         
-        if (lifeTimer > lifeTime)
-        {
-            Destroy(gameObject);
-        }
+//         if (lifeTimer > lifeTime)
+//         {
+//             Destroy(gameObject);
+//         }
 
-        if (Vector3.Distance(transform.position, GameObject.FindWithTag("Enemy").transform.position) < hitDistance)
-        {
-            GameObject.FindWithTag("Enemy").GetComponent<Creature>().Die();
-            Destroy(gameObject);
-        }
-    }
-}
+//         if (Vector3.Distance(transform.position, GameObject.FindWithTag("Enemy").transform.position) < hitDistance)
+//         {
+//             GameObject.FindWithTag("Enemy").GetComponent<Creature>().Die();
+//             Destroy(gameObject);
+//         }
+//     }
+// }
