@@ -10,6 +10,11 @@ public class PlayerXP : MonoBehaviour
     public TextMeshProUGUI shockText;
     public TextMeshProUGUI meteorText;
 
+    public GameObject levelUpWindow;
+    public GameObject orbCard;
+    public GameObject shockCard;
+    public GameObject meteorCard;
+
     public EnergyOrb energyOrb;
     public ElectricShock electricShock;
     public Meteor meteor;
@@ -57,40 +62,71 @@ public class PlayerXP : MonoBehaviour
             currentXP -= xpRequired;
             playerLevel += 1;
             xpRequired = 30 * (playerLevel + 1) * (playerLevel + 1);
-
-            while (true)
-            {
-                int randomWeapon = Random.Range(1, 4);
-
-                if (randomWeapon == 1 && energyOrb.level < 10)
-                {
-                    energyOrb.LevelUp();
-                    orbText.gameObject.SetActive(true);
-                    break;
-                }
-                else if (randomWeapon == 2 && electricShock.level < 10)
-                {
-                    electricShock.LevelUp();
-                    shockText.gameObject.SetActive(true);
-                    break;
-                }
-                else if (randomWeapon == 3 && meteor.level < 10)
-                {
-                    meteor.LevelUp();
-                    meteorText.gameObject.SetActive(true);
-                    break;
-                }
-            }
-
-            noticeTimer = 4f;
-
-            if (energyOrb.level >= 10 && electricShock.level >= 10 && meteor.level >= 10)
-            {
-                xpText.text = "XP: MAX";
-                return;
-            }
+            
+            levelUpWindow.SetActive(true);
+            Time.timeScale = 0.0001f;
         }
 
-        xpText.text = "XP: " + currentXP;
+        LVLui();
+    }
+
+    public void LVLupEnergyOrb()
+    {
+        energyOrb.LevelUp();
+        orbText.gameObject.SetActive(true);
+        noticeTimer = 4f;
+        levelUpWindow.SetActive(false);
+
+        if (energyOrb.level >= 10)
+        {
+            orbCard.SetActive(false);
+        }
+
+        LVLui();
+        Time.timeScale = 1f;
+    }
+
+    public void LVLupElectricShock()
+    {
+        electricShock.LevelUp();
+        shockText.gameObject.SetActive(true);
+        noticeTimer = 4f;
+        levelUpWindow.SetActive(false);
+
+        if (electricShock.level >= 10)
+        {
+            shockCard.SetActive(false);
+        }
+
+        LVLui();
+        Time.timeScale = 1f;
+    }
+
+    public void LVLupMeteor()
+    {
+        meteor.LevelUp();
+        meteorText.gameObject.SetActive(true);
+        noticeTimer = 4f;
+        levelUpWindow.SetActive(false);
+
+        if (meteor.level >= 10)
+        {
+            meteorCard.SetActive(false);
+        }
+
+        LVLui();
+        Time.timeScale = 1f;
+    }
+
+    public void LVLui()
+    {
+        if (energyOrb.level >= 10 && electricShock.level >= 10 && meteor.level >= 10)
+        {
+            xpText.text = "XP: MAX";
+        }
+        else
+        {
+            xpText.text = "XP: " + currentXP;
+        }
     }
 }
