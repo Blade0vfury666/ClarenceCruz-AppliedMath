@@ -5,14 +5,20 @@ public class PlayerController2 : MonoBehaviour
 {
     public float moveSpeed;
     public float jumpPower;
-    
+
     public float playerWidth;
     public float playerHeight;
-    
+
     private float verticalVelocity;
     private bool isGrounded;
-    
+
     private AABBCollider currentCollider;
+    private AABBCollider[] allColliders;
+
+    private void Start()
+    {
+        allColliders = FindObjectsByType<AABBCollider>(FindObjectsSortMode.None);
+    }
 
     private void Update()
     {
@@ -25,17 +31,15 @@ public class PlayerController2 : MonoBehaviour
         {
             horizontalInput = 1;
         }
-        
+
         Vector3 pos = transform.position;
         pos.x = pos.x + (horizontalInput * moveSpeed * Time.deltaTime);
         transform.position = pos;
-        
-        AABBCollider[] allColliders = FindObjectsByType<AABBCollider>(FindObjectsSortMode.None);
-        
+
         for (int i = 0; i < allColliders.Length; i++)
         {
             currentCollider = allColliders[i];
-            
+
             if (IsOverlapping() == true)
             {
                 if (currentCollider.gameObject.tag == "Obstacle")
@@ -50,10 +54,6 @@ public class PlayerController2 : MonoBehaviour
                         pos.x = currentCollider.max.x + (playerWidth / 2);
                     }
                     transform.position = pos;
-                }
-                if (currentCollider.gameObject.tag == "FallCollider")
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
             }
         }
@@ -74,25 +74,30 @@ public class PlayerController2 : MonoBehaviour
         }
         else
         {
-            verticalVelocity = verticalVelocity - (20f * Time.deltaTime);
+            verticalVelocity = verticalVelocity - (9.81f * Time.deltaTime);
         }
 
         pos = transform.position;
         pos.y = pos.y + (verticalVelocity * Time.deltaTime);
         transform.position = pos;
-        
+
         isGrounded = false;
 
         for (int i = 0; i < allColliders.Length; i++)
         {
             currentCollider = allColliders[i];
-            
+
             if (IsOverlapping() == true)
             {
+                if (currentCollider.gameObject.tag == "FallCollider")
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+
                 if (currentCollider.gameObject.tag == "Ground" || currentCollider.gameObject.tag == "Obstacle")
                 {
                     float targetCenterY = currentCollider.min.y + ((currentCollider.max.y - currentCollider.min.y) / 2);
-                    
+
                     if (transform.position.y > targetCenterY)
                     {
                         pos.y = currentCollider.max.y + (playerHeight / 2);
@@ -107,10 +112,6 @@ public class PlayerController2 : MonoBehaviour
                         verticalVelocity = 0;
                     }
                 }
-                if (currentCollider.gameObject.tag == "FallCollider")
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
             }
         }
     }
@@ -119,7 +120,7 @@ public class PlayerController2 : MonoBehaviour
     {
         float targetWidth = currentCollider.max.x - currentCollider.min.x;
         float targetHeight = currentCollider.max.y - currentCollider.min.y;
-        
+
         float targetCenterX = currentCollider.min.x + (targetWidth / 2);
         float targetCenterY = currentCollider.min.y + (targetHeight / 2);
 
